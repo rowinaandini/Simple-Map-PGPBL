@@ -1,20 +1,47 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Win's Map
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div id="container" style="height: 100vh; position: relative;">
+    <!-- Map container -->
   </div>
+
+  <!-- Button to toggle basemap selection card -->
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="toggleBasemapCard()">
+      <ion-icon name="list"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- Basemap selector card -->
+  <ion-card *ngIf="isBasemapCardVisible" style="position: absolute; top: 80px; right: 20px; width: 220px; z-index: 1000;">
+    <ion-card-header>
+      <ion-card-title>Select Basemap</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-checkbox (ionChange)="changeBasemap('topo-vector')" [checked]="currentBasemap === 'topo-vector'"></ion-checkbox>
+          <ion-label>Topographic</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-checkbox (ionChange)="changeBasemap('streets-vector')" [checked]="currentBasemap === 'streets-vector'"></ion-checkbox>
+          <ion-label>Streets</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-checkbox (ionChange)="changeBasemap('satellite')" [checked]="currentBasemap === 'satellite'"></ion-checkbox>
+          <ion-label>Satellite</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-checkbox (ionChange)="changeBasemap('gray')" [checked]="currentBasemap === 'gray'"></ion-checkbox>
+          <ion-label>Gray</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
